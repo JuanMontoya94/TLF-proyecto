@@ -59,6 +59,26 @@ public class AnalizadorLexico {
     {
     	Token token;
     	
+    	// Intenta extraer un operador de asignacion
+    	token = extraerSimboloAbrirOCerrar(cod, i);
+    	if ( token != null )
+    		return token;
+    	
+    	// Intenta extraer un operador de asignacion
+    	token = extraerOperadorAsignacion(cod, i);
+    	if ( token != null )
+    		return token;
+    	
+    	// Intenta extraer operadores logicos
+    	token = extraerOperadoresLogicos(cod, i);
+    	if ( token != null )
+    		return token;
+    	
+    	// Intenta extraer un operador relacional
+    	token = extraerOperadorRelacional(cod, i);
+    	if ( token != null )
+    		return token;
+    	
     	// Intenta extraer un operador aritmetico
     	token = extraerOperadorAritmetico( cod, i);
     	if ( token != null )
@@ -98,14 +118,98 @@ public class AnalizadorLexico {
 		token = extraerNoReconocido( cod, i);
 		return token;
     }
+    
+    public Token extraerSimboloAbrirOCerrar(String cod, int i) {
+		int j;
+    	if( cod.charAt(i)=='['||cod.charAt(i)=='<' ||cod.charAt(i)==']'||cod.charAt(i)=='>'){
+			j=i+1;
+				String lex =  cod.substring( i, j);
+				Token token = new Token( lex, Token.OPERADORABRIROCERRAR, j );
+				return token;			
+			
+		}
+		
+		return null;
+	}
+    
+    public Token extraerOperadorAsignacion( String cod, int i)
+	{
+		
+		int j;
+		String lex;
+		if( cod.charAt(i)=='═' && cod.charAt(i+1)==' '){
+			j=i+1;
+			
+				lex =  cod.substring( i, j);			    
+				Token token = new Token( lex, Token.OPERADORASIGNACION, j );
+				return token;
+			
+		}else if(  cod.charAt(i)=='±'||cod.charAt(i)=='┐'||cod.charAt(i)=='#'
+    			||cod.charAt(i)=='÷'||cod.charAt(i)=='R'){
+			j=i+1;
+			if( cod.charAt(j)=='═' ) {		
+			    j++;
+		        lex =  cod.substring( i, j);			    
+				Token token = new Token( lex, Token.OPERADORASIGNACION, j );
+				return token;			
+			}
+			}
+		
+		
+		return null;
+	}
+    
+    public Token extraerOperadoresLogicos(String cod, int i) {
+		int j;
+    	if( cod.charAt(i)=='$'||cod.charAt(i)=='Ø' || cod.charAt(i)=='┘'){
+			j=i+1;
+				String lex =  cod.substring( i, j);
+				Token token = new Token( lex, Token.OPERADORLOGICO, j );
+				return token;			
+			
+		}
+		
+		return null;
+	}
+   
+    public Token extraerOperadorRelacional ( String cod, int i)
+	{
+		
+		int j;
+		String lex;
+		if( cod.charAt(i)=='}' || cod.charAt(i)=='{'){
+			j=i+1;
+			if( cod.charAt(j)=='═' ) {		
+			    j++;
+		        lex =  cod.substring( i, j);			    
+				Token token = new Token( lex, Token.OPERADORRELACIONAL, j );
+				return token;			
+			}else{
+				lex =  cod.substring( i, j);			    
+				Token token = new Token( lex, Token.OPERADORRELACIONAL, j );
+				return token;
+			}
+		}else if( cod.charAt(i)=='═' || cod.charAt(i)=='┘'){
+			j=i+1;
+			if( cod.charAt(j)=='═' ) {		
+			    j++;
+		        lex =  cod.substring( i, j);			    
+				Token token = new Token( lex, Token.OPERADORRELACIONAL, j );
+				return token;			
+			}
+			}
+		
+		
+		return null;
+	}
 
     public Token extraerOperadorAritmetico(String cod, int i) {
     	int j;
     	if( cod.charAt(i)=='±'||cod.charAt(i)=='┐'||cod.charAt(i)=='#'
     			||cod.charAt(i)=='÷'||cod.charAt(i)=='R'||cod.charAt(i)=='└'||cod.charAt(i)=='┌' ){
 			j=i+1;
-		        			    
-				Token token = new Token( cod, Token.OPERADOR, j );
+				String lex =  cod.substring( i, j);	    
+				Token token = new Token( lex, Token.OPERADORARITMETICO, j );
 				return token;			
 			
 		}
@@ -116,8 +220,8 @@ public class AnalizadorLexico {
 		int j;
     	if( cod.charAt(i)=='«'||cod.charAt(i)=='»' ){
 			j=i+1;
-		        			    
-				Token token = new Token( cod, Token.OPERADOR, j );
+				String lex =  cod.substring( i, j);
+				Token token = new Token( lex, Token.OPERADORTERMINALOINICIAL, j );
 				return token;			
 			
 		}
@@ -128,8 +232,8 @@ public class AnalizadorLexico {
 		int j;
     	if( cod.charAt(i)=='~' ){
 			j=i+1;
-		        			    
-				Token token = new Token( cod, Token.OPERADOR, j );
+				String lex =  cod.substring( i, j);		    
+				Token token = new Token( lex, Token.OPERADORSEPARADORDESENTENCIA, j );
 				return token;			
 			
 		}
@@ -200,22 +304,22 @@ public class AnalizadorLexico {
      * @return el token operador asignación o NULL, si el token en la posición dada no es un operador de asignación. El Token se compone de 
      * el lexema, el tipo y la posición del siguiente lexema.
      */
-	public Token extraerOperadorAsignacion ( String cod, int i )
-	{
-		if( cod.charAt(i) =='<'){
-			int j=i+1;
-			if( j<cod.length() && (cod.charAt(j) =='<' || cod.charAt(j) =='-' ) ){		
-				j++;
-				if( j<cod.length() && cod.charAt(j) =='<' ){		
-					j++;
-			        String lex =  cod.substring( i, j);			    
-					Token token = new Token( lex, Token.OPERADORASIGNACION, j );
-					return token;
-				}
-			}
-		}
-		return null;
-	}
+//	public Token extraerOperadorAsignacion ( String cod, int i )
+//	{
+//		if( cod.charAt(i) =='<'){
+//			int j=i+1;
+//			if( j<cod.length() && (cod.charAt(j) =='<' || cod.charAt(j) =='-' ) ){		
+//				j++;
+//				if( j<cod.length() && cod.charAt(j) =='<' ){		
+//					j++;
+//			        String lex =  cod.substring( i, j);			    
+//					Token token = new Token( lex, Token.OPERADORASIGNACION, j );
+//					return token;
+//				}
+//			}
+//		}
+//		return null;
+//	}
 	
     /**
      * Intenta extraer un identificador de la cadena cod a partir de la posición i,

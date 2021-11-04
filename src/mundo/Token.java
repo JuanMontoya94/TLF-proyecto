@@ -29,6 +29,12 @@ public class Token {
     final public static String OPERADORASIGNACION = "Operador de asignación";
     final public static String IDENTIFICADOR = "Identificador";
     final public static String NORECONOCIDO = "No reconocido";
+	final public static String OPERADORSEPARADORDESENTENCIA = "operador separador de sentencia";
+	final public static String OPERADORTERMINALOINICIAL = "Operador terminal o inicial";
+	final public static String OPERADORARITMETICO = "Operador aritmetico";
+	final public static String OPERADORRELACIONAL = "Operador relacional";
+	final public static String OPERADORLOGICO = "Operador Logico";
+	final public static String OPERADORABRIROCERRAR = "Simbolo abrir o cerrar";
  
     // -----------------------------------------------------------------
     // Atributos
