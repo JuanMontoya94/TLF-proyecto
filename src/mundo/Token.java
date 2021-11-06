@@ -35,6 +35,8 @@ public class Token {
 	final public static String OPERADORRELACIONAL = "Operador relacional";
 	final public static String OPERADORLOGICO = "Operador Logico";
 	final public static String OPERADORABRIROCERRAR = "Simbolo abrir o cerrar";
+	final public static String ASIGNACIONCADENA = "Cadena";
+	final public static String ASIGNACIONCHAR= "Character";
  
     // -----------------------------------------------------------------
     // Atributos

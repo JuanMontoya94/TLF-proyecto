@@ -59,6 +59,12 @@ public class AnalizadorLexico {
     {
     	Token token;
     	
+    	// Intenta reconocer una cadena
+    	token = extraerFormatoString(cod, i);
+    	if ( token != null )
+    		return token;
+ 
+    	
     	// Intenta extraer un operador de asignacion
     	token = extraerSimboloAbrirOCerrar(cod, i);
     	if ( token != null )
@@ -267,6 +273,120 @@ public class AnalizadorLexico {
 		
 		return null;
 	}
+    
+    //metodo de aceptacion del formato para declarar un 
+    public Token extraerFormatoString(String cod, int i) {
+		
+		String lex;
+		int j;
+		int indiceInicial=i+1;
+		
+		if(cod.charAt(i)=='*') {
+			j=i+1;
+			while(j < cod.length()) {
+				if (cod.charAt(j)!='*'){
+					j++;
+				}else {
+					j++;
+					lex =  cod.substring( i+1, j-1);    
+					Token token = new Token( lex, Token.ASIGNACIONCADENA, j );
+					return token;
+				}
+					
+	    		
+			}
+			lex =  cod.substring( i, indiceInicial);    
+			Token token = new Token( lex, Token.NORECONOCIDO, indiceInicial );
+			return token;
+		}
+    	
+		return null;
+    
+    	
+    }
+    
+    public Token extraerFormatoChar(String cod, int i) {
+		String lex;
+		int j;
+		int indiceInicial=i+1;
+		
+		if(cod.charAt(i)=='"') {
+			j=i+1;
+			while(j < cod.length()) {
+				if (cod.charAt(j)!='"'){
+					j++;
+				}else {
+					j++;
+					lex =  cod.substring( i+1, j-1);    
+					Token token = new Token( lex, Token.ASIGNACIONCHAR, j );
+					return token;
+				}
+					
+	    		
+			}
+			lex =  cod.substring( i, indiceInicial);    
+			Token token = new Token( lex, Token.NORECONOCIDO, indiceInicial );
+			return token;
+		}
+  	
+      	
+      	return null;
+      	
+      }
+    
+    public Token extraerFormatoEntero() {
+  		int i;
+  		char cad;
+  		/*if(cad=='*') {
+  			while() {
+  				
+  	    		
+  	    		if(cad=='*') {
+  	    			break;
+  	    		}
+  			}
+  		}*/
+      	
+      	
+      	return null;
+      	
+      }
+    
+    public Token extraerFormatoDouble() {
+  		int i;
+  		char cad;
+  		/*if(cad=='*') {
+  			while() {
+  				
+  	    		
+  	    		if(cad=='*') {
+  	    			break;
+  	    		}
+  			}
+  		}*/
+      	
+      	
+      	return null;
+      	
+      }
+    
+    public Token extraerFormatoBoolean() {
+  		int i;
+  		char cad;
+  		/*if(cad=='*') {
+  			while() {
+  				
+  	    		
+  	    		if(cad=='*') {
+  	    			break;
+  	    		}
+  			}
+  		}
+      	*/
+      	
+      	return null;
+      	
+      }
 
 	/**
      * Intenta extraer un entero de la cadena cod a partir de la posición i,
