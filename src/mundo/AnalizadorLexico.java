@@ -59,6 +59,12 @@ public class AnalizadorLexico {
     {
     	Token token;
     	
+    	////////////////////////////////////////////////////////
+    	// Intenta extraer palabra reservadas
+    	token = extraerPalabraReservadaCiclo(cod, i);
+    	if ( token != null )
+    		return token;
+    	////////////////////////////////////////////////////////
     	// Intenta extraer un operador de asignacion
     	token = extraerSimboloAbrirOCerrar(cod, i);
     	if ( token != null )
@@ -119,6 +125,58 @@ public class AnalizadorLexico {
 		return token;
     }
     
+    private Token extraerPalabraReservadaCiclo(String cod, int i) {
+		int j;
+		String lex;
+		//para el ciclo fr
+		if(cod.charAt(i)=='F'){
+			j=i+1;
+			if( j<cod.length()){
+				if(cod.charAt(j)=='r'){
+					j++;
+					lex =  cod.substring( i, j);
+					Token token = new Token( lex, Token.PALABRARESERVADACICLO, j );
+					return token;
+				}
+			}
+			
+		}
+		
+		// para el ciclo We
+		if(cod.charAt(i)=='W'){
+			j=i+1;
+			if( j<cod.length()){
+				if(cod.charAt(j)=='e'){
+					j++;
+					lex =  cod.substring( i, j);
+					Token token = new Token( lex, Token.PALABRARESERVADACICLO, j );
+					return token;
+				}
+			}
+			
+		}
+		
+		// para el ds
+		if(cod.charAt(i)=='d'){
+			j=i+1;
+			if( j<cod.length()){
+				if(cod.charAt(j)=='s'){
+					j++;
+					lex =  cod.substring( i, j);
+					Token token = new Token( lex, Token.PALABRARESERVADACICLO, j );
+					return token;
+				}
+			}
+			
+		}
+		return null;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+    
+    
+    //////////////////////////////////////////////////////////////////////////
+    
     public Token extraerSimboloAbrirOCerrar(String cod, int i) {
 		int j;
 		String lex;
@@ -139,7 +197,7 @@ public class AnalizadorLexico {
 	{
     	String lex;
 		int j;
-		if( cod.charAt(i)=='═' && cod.charAt(i+1)==' '){
+		if( cod.charAt(i)=='═'){
 			j=i+1;
 			
 				lex =  cod.substring( i, j);		    
