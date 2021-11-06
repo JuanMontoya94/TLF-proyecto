@@ -68,7 +68,15 @@ public class AnalizadorLexico {
     	
 
     	////////////////////////////////////////////////////////
-    	// Intenta extraer palabra reservadas
+    	// Intenta extraer palabra reservadas decision
+    	token = extraerPalabraReservadaClase(cod, i);
+    	if ( token != null )
+    		return token;
+    	// Intenta extraer palabra reservadas decision
+    	token = extraerPalabraReservadaDesicion(cod, i);
+    	if ( token != null )
+    		return token;
+    	// Intenta extraer palabra reservadas ciclo
     	token = extraerPalabraReservadaCiclo(cod, i);
     	if ( token != null )
     		return token;
@@ -133,6 +141,69 @@ public class AnalizadorLexico {
 		token = extraerNoReconocido( cod, i);
 		return token;
     }
+    
+    private Token extraerPalabraReservadaClase(String cod, int i) {
+    	int j;
+		String lex;
+		if(cod.charAt(i)=='c'){
+			j=i+1;
+			if( j<cod.length()){
+				if(cod.charAt(j)=='l'){
+					j++;
+					if( j<cod.length()){
+						if(cod.charAt(j)=='s'){
+							j++;
+							if( j<cod.length()){
+								if(cod.charAt(j)=='s'){
+									j++;
+									lex =  cod.substring( i, j);
+									Token token = new Token( lex, Token.PALABRARESERVADACLASE, j );
+									return token;
+								}
+							}
+						}
+					}
+				}
+			}
+			
+		}
+		
+		return null;
+	}
+
+	private Token extraerPalabraReservadaDesicion(String cod, int i) {
+		int j;
+		String lex;
+		//para la decision si
+		if(cod.charAt(i)=='s'){
+			j=i+1;
+			if( j<cod.length()){
+				if(cod.charAt(j)=='i'){
+					j++;
+					lex =  cod.substring( i, j);
+					Token token = new Token( lex, Token.PALABRARESERVADADESICION, j );
+					return token;
+				}
+			}
+			
+		}
+		
+		// para el ciclo We
+		if(cod.charAt(i)=='s'){
+			j=i+1;
+			if( j<cod.length()){
+				if(cod.charAt(j)=='w'){
+					j++;
+					lex =  cod.substring( i, j);
+					Token token = new Token( lex, Token.PALABRARESERVADADESICION, j );
+					return token;
+				}
+			}
+			
+		}
+		
+		return null;
+	}
     
     private Token extraerPalabraReservadaCiclo(String cod, int i) {
 		int j;

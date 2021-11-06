@@ -40,6 +40,8 @@ public class Token {
 	final public static String ASIGNACIONCHAR= "Character";
 
 	final public static String PALABRARESERVADACICLO = "palabra reservada ciclo";
+	final public static String PALABRARESERVADADESICION = "palabra reservada decision";
+	final public static String PALABRARESERVADACLASE = "palabra reservada clase";
 
  
     // -----------------------------------------------------------------
