@@ -599,10 +599,10 @@ public class AnalizadorLexico {
 		int j;
 		int indiceInicial=i+1;
 		int k=0;
-		if(cod.charAt(i)=='"') {
+		if(cod.charAt(i)=='?') {
 			j=i+1;
 			while(j < cod.length()) {
-				if (cod.charAt(j)!='"'){
+				if (cod.charAt(j)!='?'){
 					j++;
 					k++;
 				}else {
