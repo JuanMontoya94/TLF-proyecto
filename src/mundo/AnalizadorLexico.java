@@ -106,20 +106,28 @@ public class AnalizadorLexico {
     	
     	// Intenta extraer palabra reservadas
 
-    	////////////////////////////////////////////////////////
-    	// Intenta extraer palabra reservadas decision
+    	
+    	// Intenta extraer palabra reservadas clase
     	token = extraerPalabraReservadaClase(cod, i);
     	if ( token != null )
     		return token;
+
     	// Intenta extraer palabra reservadas decision
     	token = extraerPalabraReservadaDesicion(cod, i);
     	if ( token != null )
     		return token;
+    	
     	// Intenta extraer palabra reservadas ciclo
-
     	token = extraerPalabraReservadaCiclo(cod, i);
     	if ( token != null )
     		return token;
+    	
+    	// Intenta extraer palabra reservadas ciclo
+    	token = extraerPalabraReservadaTiposDato(cod, i);
+    	if ( token != null )
+    		return token;
+    	
+    	
 /////////////////////////////MONTOYA///////////////////////////////////
 
     	// Intenta extraer un operador de asignacion
@@ -181,8 +189,116 @@ public class AnalizadorLexico {
 		token = extraerNoReconocido( cod, i);
 		return token;
     }
-    
-    private Token extraerPalabraReservadaClase(String cod, int i) {
+ /////////////////////////////////???????///////////////////////////////////   
+    private Token extraerPalabraReservadaTiposDato(String cod, int i) {
+    	 String lex;
+  		int j=i;
+  		//para la palabra reservada ent "enteros"
+  		if(cod.charAt(j)=='e') {
+  			j++;
+  			if(j<cod.length()) {
+  				if(cod.charAt(j)=='n') {
+  					j++;
+  					if(j<cod.length()) {
+  						if(cod.charAt(j)=='t') {
+  							j++;
+  							lex =  cod.substring( i, j);
+  	    					Token token = new Token( lex, Token.PALABRARESERVADATIPODATOE, j );
+  	    					return token;
+  						}
+  					}
+  				}
+  				
+  			}
+  			
+  		}
+  		
+  	//para la palabra reservada dbe "double"
+  		if(cod.charAt(j)=='d') {
+  			j++;
+  			if(j<cod.length()) {
+  				if(cod.charAt(j)=='b') {
+  					j++;
+  					if(j<cod.length()) {
+  						if(cod.charAt(j)=='e') {
+  							j++;
+  							lex =  cod.substring( i, j);
+  	    					Token token = new Token( lex, Token.PALABRARESERVADATIPODATOD, j );
+  	    					return token;
+  						}
+  					}
+  				}
+  				
+  			}
+  			
+  		}
+  		
+  		
+  	//para la palabra reservada stg "String"
+  		if(cod.charAt(j)=='s') {
+  			j++;
+  			if(j<cod.length()) {
+  				if(cod.charAt(j)=='t') {
+  					j++;
+  					if(j<cod.length()) {
+  						if(cod.charAt(j)=='g') {
+  							j++;
+  							lex =  cod.substring( i, j);
+  	    					Token token = new Token( lex, Token.PALABRARESERVADATIPODATOS, j );
+  	    					return token;
+  						}
+  					}
+  				}
+  				
+  			}
+  			
+  		}
+  		
+  	//para la palabra reservada chr "character"
+  		if(cod.charAt(j)=='c') {
+  			j++;
+  			if(j<cod.length()) {
+  				if(cod.charAt(j)=='h') {
+  					j++;
+  					if(j<cod.length()) {
+  						if(cod.charAt(j)=='r') {
+  							j++;
+  							lex =  cod.substring( i, j);
+  	    					Token token = new Token( lex, Token.PALABRARESERVADATIPODATOC, j );
+  	    					return token;
+  						}
+  					}
+  				}
+  				
+  			}
+  			
+  		}
+  		
+  	//para la palabra reservada boo "boolean"
+  		if(cod.charAt(j)=='b') {
+  			j++;
+  			if(j<cod.length()) {
+  				if(cod.charAt(j)=='o') {
+  					j++;
+  					if(j<cod.length()) {
+  						if(cod.charAt(j)=='o') {
+  							j++;
+  							lex =  cod.substring( i, j);
+  	    					Token token = new Token( lex, Token.PALABRARESERVADATIPODATOB, j );
+  	    					return token;
+  						}
+  					}
+  				}
+  				
+  			}
+  			
+  		}
+  		
+  		
+		return null;
+	}
+
+	private Token extraerPalabraReservadaClase(String cod, int i) {
     	int j;
 		String lex;
 		if(cod.charAt(i)=='c'){
@@ -228,7 +344,7 @@ public class AnalizadorLexico {
 			
 		}
 		
-		// para el ciclo We
+		// para el switch
 		if(cod.charAt(i)=='s'){
 			j=i+1;
 			if( j<cod.length()){
@@ -248,7 +364,7 @@ public class AnalizadorLexico {
     private Token extraerPalabraReservadaCiclo(String cod, int i) {
 		int j;
 		String lex;
-		//para el ciclo fr
+		//para el ciclo fr "for"
 		if(cod.charAt(i)=='F'){
 			j=i+1;
 			if( j<cod.length()){
@@ -262,7 +378,7 @@ public class AnalizadorLexico {
 			
 		}
 		
-		// para el ciclo We
+		// para el ciclo We "while"
 		if(cod.charAt(i)=='W'){
 			j=i+1;
 			if( j<cod.length()){
@@ -276,7 +392,7 @@ public class AnalizadorLexico {
 			
 		}
 		
-		// para el ds
+		// para el ds "do while"
 		if(cod.charAt(i)=='d'){
 			j=i+1;
 			if( j<cod.length()){
@@ -292,7 +408,7 @@ public class AnalizadorLexico {
 		return null;
 	}
 
-	//////////////////////////////////////////////////////////////////////////
+	////////////////////////////MONTOYA//////////////////////////////////////////////
     
     
     //////////////////////////////////////////////////////////////////////////
@@ -445,8 +561,10 @@ public class AnalizadorLexico {
 		
 		return null;
 	}
+
+//////////////////////////TAMARA///////////////////////////////////    
     
-    //metodo de aceptacion del formato para declarar un 
+    //metodo de aceptacion del formato para declarar una cadena
     public Token extraerFormatoString(String cod, int i) {
 		
 		String lex;
@@ -696,7 +814,9 @@ public class AnalizadorLexico {
     	 String lex;
  		int j=i;
  		
- 		
+ 		if(cod.equals("ent")||cod.equals("dbe")||cod.equals("stg")||cod.equals("chr")||cod.equals("boo")) {
+ 			return null;
+ 		}
  		
  			while(j<cod.length()) {
  				if(esMinuscula(cod.charAt(j))) {

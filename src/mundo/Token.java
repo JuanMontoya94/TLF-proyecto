@@ -48,6 +48,12 @@ public class Token {
 	final public static String PALABRARESERVADACICLO = "palabra reservada ciclo";
 	final public static String PALABRARESERVADADESICION = "palabra reservada decision";
 	final public static String PALABRARESERVADACLASE = "palabra reservada clase";
+	final public static String PALABRARESERVADATIPODATOE = "palabra reservada enteros ";
+	final public static String PALABRARESERVADATIPODATOD = "palabra reservada double ";
+	final public static String PALABRARESERVADATIPODATOS = "palabra reservada string ";
+	final public static String PALABRARESERVADATIPODATOC = "palabra reservada character ";
+	final public static String PALABRARESERVADATIPODATOB = "palabra reservada boolean ";
+	
 
  
     // -----------------------------------------------------------------
