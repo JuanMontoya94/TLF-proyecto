@@ -59,20 +59,55 @@ public class AnalizadorLexico {
     {
     	Token token;
     	
-
+//////////////////////TAMARA//////////////////////////////////
     	// Intenta reconocer una cadena
     	token = extraerFormatoString(cod, i);
     	if ( token != null )
     		return token;
  
+    	// Intenta reconocer un character
+    	token = extraerFormatoChar(cod, i);
+    	if ( token != null )
+    		return token;
     	
+    	// Intenta reconocer un entero
+    	token = extraerFormatoEntero(cod, i);
+    	if ( token != null )
+    		return token;
+    	
+    	// Intenta reconocer un double
+    	token = extraerFormatoDouble(cod, i);
+    	if ( token != null )
+    		return token;
 
-    	////////////////////////////////////////////////////////
+    	// Intenta reconocer un boolean
+    	token = extraerFormatoBoolean(cod, i);
+    	if ( token != null )
+    		return token;
+    	
+    	// Intenta reconocer un identificador clase
+    	token = extraerIdentificadorClase(cod, i);
+    	if ( token != null )
+    		return token;
+    	
+    	// Intenta reconocer un identificador metodo
+    	token = extraerIdentificadorMetodo(cod, i);
+    	if ( token != null )
+    		return token;
+    	   	
+    	// Intenta reconocer un identificador variable
+    	token = extraerIdentificadorVariable(cod, i);
+    	if ( token != null )
+    		return token;
+    	
+    	
+//////////////////////////////?????/////////////////////////////////////
+    	
     	// Intenta extraer palabra reservadas
     	token = extraerPalabraReservadaCiclo(cod, i);
     	if ( token != null )
     		return token;
-    	////////////////////////////////////////////////////////
+/////////////////////////////MONTOYA///////////////////////////////////
 
     	// Intenta extraer un operador de asignacion
     	token = extraerSimboloAbrirOCerrar(cod, i);
@@ -370,17 +405,26 @@ public class AnalizadorLexico {
 		String lex;
 		int j;
 		int indiceInicial=i+1;
-		
+		int k=0;
 		if(cod.charAt(i)=='"') {
 			j=i+1;
 			while(j < cod.length()) {
 				if (cod.charAt(j)!='"'){
 					j++;
+					k++;
 				}else {
+					if(k>1) {
+						break;
+					}
 					j++;
+					k++;
 					lex =  cod.substring( i+1, j-1);    
 					Token token = new Token( lex, Token.ASIGNACIONCHAR, j );
 					return token;
+					
+						
+					
+					
 				}
 					
 	    		
@@ -395,59 +439,211 @@ public class AnalizadorLexico {
       	
       }
     
-    public Token extraerFormatoEntero() {
-  		int i;
-  		char cad;
-  		/*if(cad=='*') {
-  			while() {
-  				
-  	    		
-  	    		if(cad=='*') {
-  	    			break;
-  	    		}
-  			}
-  		}*/
+    public Token extraerFormatoEntero(String cod, int i) {
+  		
+    	String lex;
+		int j=i;
+		
+		
+		
+			
+			while(esDigito(cod.charAt(j))&&j< cod.length()) {
+				
+				j++;
+				lex =  cod.substring( i, j);				
+				if(j==cod.length()) {
+					Token token = new Token( lex, Token.ASIGNACIONENTERO, j );
+					return token;
+				}
+			}
+//			lex =  cod.substring( i, indiceInicial);    
+//			Token token = new Token( lex, Token.NORECONOCIDO, indiceInicial );
+//			return token;
+		
+			
+		
+			
+			
+    	
+		return null;
+    
       	
+      	
+      	
+      }
+    
+    public Token extraerFormatoDouble(String cod, int i) {
+     	    String lex;
+    		int j=i;
+    		boolean flag=false;
+    		
+    		
+    			
+    			while(j< cod.length()) {
+    				
+    				if(esDigito(cod.charAt(j))) {
+    					
+        				lex =  cod.substring( i, j);
+    				}
+    				if(cod.charAt(j)==','&&flag==false) {
+    					
+        				lex =  cod.substring( i, j);
+        				flag=true;
+    				}
+    				if(cod.charAt(j)=='@'&&flag==true) {
+    					j++;
+        				lex =  cod.substring( i, j-1);
+    					Token token = new Token( lex, Token.ASIGNACIONDOUBLE, j );
+    					return token;
+    				}
+    				j++;
+    			}
+//    			lex =  cod.substring( i, indiceInicial);    
+//    			Token token = new Token( lex, Token.NORECONOCIDO, indiceInicial );
+//    			return token;
+    	
+    			
+    		
+    			
+    			
+        	
+    		return null;
+        
+      	
+      }
+    
+    public Token extraerFormatoBoolean(String cod, int i) {
+    	 String lex;
+ 		int j=i;
+ 		
+ 		if(cod.charAt(j)=='V') {
+ 			j++;
+ 			if(j<cod.length()) {
+ 				if(cod.charAt(j)=='e') {
+ 					j++;
+ 					if(j<cod.length()) {
+ 						if(cod.charAt(j)=='r') {
+ 							j++;
+ 							lex =  cod.substring( i, j);
+ 	    					Token token = new Token( lex, Token.ASIGNACIONBOOLEAN, j );
+ 	    					return token;
+ 						}
+ 					}
+ 				}
+ 				
+ 			}
+ 			
+ 		}else if(cod.charAt(j)=='F') {
+ 			j++;
+ 			if(j<cod.length()) {
+ 				if(cod.charAt(j)=='a') {
+ 					j++;
+ 					if(j<cod.length()) {
+ 						if(cod.charAt(j)=='l') {
+ 							j++;
+ 							lex =  cod.substring( i, j);
+ 	    					Token token = new Token( lex, Token.ASIGNACIONBOOLEAN, j );
+ 	    					return token;
+ 						}
+ 					}
+ 				}
+ 				
+ 			}
+ 		}
       	
       	return null;
       	
       }
     
-    public Token extraerFormatoDouble() {
-  		int i;
-  		char cad;
-  		/*if(cad=='*') {
-  			while() {
-  				
-  	    		
-  	    		if(cad=='*') {
-  	    			break;
-  	    		}
-  			}
-  		}*/
-      	
-      	
+    public Token extraerIdentificadorClase(String cod, int i) {
+    	String lex;
+		int j=i;
+		
+		
+		if(cod.charAt(j)=='-') {
+			j++;
+				while(j < cod.length()) {
+					if(esLetra(cod.charAt(j))==false) {
+						lex =  cod.substring( i, j);    
+						Token token = new Token( lex, Token.NORECONOCIDO, j );
+						return token;
+					}
+					j++;
+												
+				}
+				lex =  cod.substring( i, j);    
+				Token token = new Token( lex, Token.IDENTIFICADORCLASE, j );
+				return token;
+			
+			
+			
+		}
+    	
+
       	return null;
       	
       }
     
-    public Token extraerFormatoBoolean() {
-  		int i;
-  		char cad;
-  		/*if(cad=='*') {
-  			while() {
-  				
-  	    		
-  	    		if(cad=='*') {
-  	    			break;
-  	    		}
-  			}
-  		}
-      	*/
-      	
+    public Token extraerIdentificadorMetodo(String cod, int i) {
+  		
+    	String lex;
+		int j=i;
+		
+		
+		if(cod.charAt(j)=='&') {
+			j++;
+				while(j < cod.length()) {
+					if(esLetra(cod.charAt(j))==false) {
+						lex =  cod.substring( i, j);    
+						Token token = new Token( lex, Token.NORECONOCIDO, j );
+						return token;
+					}
+					j++;
+												
+				}
+				lex =  cod.substring( i, j);    
+				Token token = new Token( lex, Token.IDENTIFICADORMETODO, j );
+				return token;
+			
+			
+			
+		}
+    	
+
       	return null;
       	
+      	
       }
+
+     public Token extraerIdentificadorVariable(String cod, int i) {
+    	 
+    	 String lex;
+ 		int j=i;
+ 		
+ 		
+ 		
+ 			while(j<cod.length()) {
+ 				if(esMinuscula(cod.charAt(j))) {
+ 					j++;
+ 					
+ 	 			
+ 				}else {
+ 					j++;
+ 					lex =  cod.substring( i, j);    
+					Token token = new Token( lex, Token.NORECONOCIDO, j );
+					return token;
+ 					
+ 				}
+ 				
+ 			}
+ 			    lex =  cod.substring( i, j);    
+				Token token = new Token( lex, Token.IDENTIFICADORVARIABLE, j );
+				return token;
+ 			
+  	
+      }
+    
+    
 
 	/**
      * Intenta extraer un entero de la cadena cod a partir de la posición i,
@@ -585,6 +781,16 @@ public class AnalizadorLexico {
 	public boolean esLetra (char caracter )
 	{
 		return  (caracter >= 'A' && caracter <= 'Z') || (caracter >= 'a' && caracter <= 'z');
+	}
+	
+	public boolean esMayuscula (char caracter )
+	{
+		return  (caracter >= 'A' && caracter <= 'Z');
+	}
+	
+	public boolean esMinuscula (char caracter )
+	{
+		return  (caracter >= 'a' && caracter <= 'z');
 	}
 
 }

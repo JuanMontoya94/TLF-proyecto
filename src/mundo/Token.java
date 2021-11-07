@@ -36,9 +36,15 @@ public class Token {
 	final public static String OPERADORLOGICO = "Operador Logico";
 	final public static String OPERADORABRIROCERRAR = "Simbolo abrir o cerrar";
 
-	final public static String ASIGNACIONCADENA = "Cadena";
-	final public static String ASIGNACIONCHAR= "Character";
-
+	final public static String ASIGNACIONCADENA = "Formato Cadena";
+	final public static String ASIGNACIONCHAR= "Formato Character";
+	final public static String ASIGNACIONENTERO= "Formato Entero";
+	final public static String ASIGNACIONDOUBLE= "Formato Double";
+	final public static String ASIGNACIONBOOLEAN= "Formato Boolean";
+	final public static String IDENTIFICADORCLASE= "Identificador regla Clase";
+	final public static String IDENTIFICADORMETODO= "Identificador regla Metodo";
+	final public static String IDENTIFICADORVARIABLE= "Identificador regla Variable";
+	
 	final public static String PALABRARESERVADACICLO = "palabra reservada ciclo";
 
  
