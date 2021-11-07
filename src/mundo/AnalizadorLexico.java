@@ -592,7 +592,6 @@ public class AnalizadorLexico {
     	
 		return null;
     
-    	
     }
     
     public Token extraerFormatoChar(String cod, int i) {
