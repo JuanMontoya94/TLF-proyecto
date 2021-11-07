@@ -46,6 +46,8 @@ public class Token {
 	final public static String IDENTIFICADORVARIABLE= "Identificador regla Variable";
 	
 	final public static String PALABRARESERVADACICLO = "palabra reservada ciclo";
+	final public static String PALABRARESERVADADESICION = "palabra reservada decision";
+	final public static String PALABRARESERVADACLASE = "palabra reservada clase";
 
  
     // -----------------------------------------------------------------
