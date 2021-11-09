@@ -31,7 +31,13 @@ public class Token {
     final public static String NORECONOCIDO = "No reconocido";
 	final public static String OPERADORSEPARADORDESENTENCIA = "operador separador de sentencia";
 	final public static String OPERADORTERMINALOINICIAL = "Operador terminal o inicial";
-	final public static String OPERADORARITMETICO = "Operador aritmetico";
+	final public static String OPERADORARITMETICORE = "Operador aritmetico residuo";
+	final public static String OPERADORARITMETICOS = "Operador aritmetico suma";
+	final public static String OPERADORARITMETICOR = "Operador aritmetico resta";
+	final public static String OPERADORARITMETICOD = "Operador aritmetico division";
+	final public static String OPERADORARITMETICOM = "Operador aritmetico multipplicacion";
+	final public static String OPERADORARITMETICOPO = "Operador aritmetico potenica";
+	final public static String OPERADORARITMETICORA = "Operador aritmetico raiz";
 	final public static String OPERADORRELACIONAL = "Operador relacional";
 	final public static String OPERADORLOGICO = "Operador Logico";
 	final public static String OPERADORABRIROCERRAR = "Simbolo abrir o cerrar";
