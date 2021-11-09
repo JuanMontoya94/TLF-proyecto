@@ -7,6 +7,7 @@
  * Ejercicio: AnalizadorLexico
  * Diseño original por: Leonardo A. Hernández R. - Agosto 2008 - Marzo 2009
  * Modificado y usado por: Claudia E. Quiceno R- Julio 2021
+ * Modificado y usado por: Juan David Montoya, Jhon Mayront Tamara 
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
